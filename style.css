@@ -402,8 +402,16 @@ button:hover{
     padding: 24px;
     border-radius: 16px;    
     width: 30%;
+    height: auto;
     color: white;
-    box-shadow: 0 0 10px 0 #bbd3d7;
+    /* box-shadow: 0 0 10px 0 #bbd3d7; */
+    box-shadow: 0 0 2px 0 #bbd3d7;
+    text-align: justify;
+    box-sizing: border-box;
+    position: relative;
+    
+    /* Transition Property */
+    /* transition: scale 0.5 linear; */
 
 }
 
@@ -417,11 +425,47 @@ button:hover{
     color: #00d6fa;
 }
 
-.services .services-box .card:hover{
-    box-shadow: 0 0 10px 0 #00d6fa;
-    border-color: #00d6fa;
-    border-style: solid;
+@property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
 }
+
+.services .services-box .card::after, .services .services-box .card::before{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(from var(--angle), transparent 70%, #00d6fa);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    padding: 3px;
+    border-radius: 16px;
+    animation: 3s spin linear infinite;
+}
+
+@keyframes spin{
+    from{
+        --angle: 0deg;
+    }
+    to{
+        --angle: 360deg;
+    }
+}
+
+.services .services-box .card::before{
+    filter: blur(1.5rem);
+    opacity: 0.2;
+}
+
+/* .services .services-box .card:hover{
+    /* box-shadow: 0 0 10px 0 #00d6fa; */
+    /* border-color: #00d6fa; */
+    /* border-style: solid; */
+    /* scale: 1.1; */
+/* } */
 
 .latest-works{
     display: flex;
